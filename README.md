@@ -42,8 +42,10 @@ Bitte keine Abhängigkeiten, keine Build-Schritte, keine externen Skripte oder S
 
 ## Lizenz
 
-Der Quelltext der Website steht unter der [PolyForm Noncommercial License 1.0.0](LICENSE), siehe auch [NOTICE](NOTICE) und [COMMERCIAL-LICENSE.md](COMMERCIAL-LICENSE.md) für die zusätzliche Erlaubnis für Vereine, Elternvertretungen, Schulen und Kitas sowie für kommerzielle Anfragen.
+Elternvertreter-Starterkit ist lizenzpflichtig. Der Quellcode ist zur Ansicht öffentlich, damit du Aufbau, Datenschutz und Sicherheit prüfen kannst. Installieren, betreiben, ändern oder weitergeben ist nur mit einer Lizenz erlaubt, siehe [LICENSE](LICENSE). Für den Einsatz fragst du eine Lizenz an: [LIZENZ-ERWERBEN.md](LIZENZ-ERWERBEN.md).
 
-Die Inhaltstexte, also Vorlagen, Checklisten und Erklärtexte, sind davon ausgenommen und stehen unter [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/deed.de). Eltern dürfen sie ohne Nachdenken kopieren, verändern und weitergeben.
+Die Vorlagen und Checklisten der Website dürfen Elternvertretungen für ihre eigene Elternarbeit ausdrucken, ausfüllen und an die eigene Elternschaft weitergeben. Inhalte, die vor der Lizenzänderung unter CC0 veröffentlicht wurden, bleiben in dieser Fassung gemeinfrei.
+
+Beiträge: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 Keine Rechtsberatung. Maßgeblich sind immer die amtlichen Gesetzestexte.
