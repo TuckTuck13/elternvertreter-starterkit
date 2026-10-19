@@ -32,6 +32,18 @@
         links[i].setAttribute("aria-current", "page");
       }
     }
+    /* Auf schmalen Bildschirmen ist die Navigation eine wischbare Leiste:
+       die aktuelle Seite in den sichtbaren Bereich rücken, ohne die Seite selbst zu scrollen */
+    var aktiv = document.querySelector('.nav a[aria-current="page"]');
+    var leiste = aktiv && aktiv.closest("ul");
+    if (leiste && leiste.scrollWidth > leiste.clientWidth) {
+      var r = aktiv.parentNode.getBoundingClientRect();
+      var l = leiste.getBoundingClientRect();
+      if (r.right > l.right - 40) {
+        /* aktiven Punkt rechtsbündig zeigen, davor liegende bleiben angeschnitten sichtbar */
+        leiste.scrollLeft += r.right - l.right + 48;
+      }
+    }
   })();
 
   /* Checklisten: Haken bleiben erhalten */

@@ -145,6 +145,8 @@ a:hover { text-decoration-thickness: 0.14em; }
   align-items: center;
   gap: 0.6rem;
   min-height: 48px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 /* Kleines Zeichen: sechs Heftrücken in den Bereichsfarben */
 .marke .pin {
@@ -187,8 +189,34 @@ a:hover { text-decoration-thickness: 0.14em; }
 }
 @media (prefers-color-scheme: dark) { .nav a[aria-current="page"] { border-bottom-color: var(--bc-ink); } }
 
+/* Schmale Bildschirme: eine waagerecht wischbare Leiste statt vier Zeilen.
+   Alle Ziele bleiben in einer Reihe erreichbar, der rechte Rand blendet aus und zeigt: hier geht es weiter.
+   Die aktuelle Seite bekommt eine getönte Fläche plus Unterstrich und wird per Skript in den sichtbaren Bereich gerückt. */
 @media (max-width: 47.99rem) {
-  .nav a { min-height: 44px; padding: 0.35rem 0.5rem; font-size: 0.95rem; }
+  .kopf-innen { padding-top: 0.15rem; }
+  .marke { min-height: 44px; }
+  .nav { margin: 0 -1rem; flex-basis: calc(100% + 2rem); min-width: 0; }
+  .nav ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding: 0 2.5rem 0 1rem;
+    gap: 0.25rem;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 2.5rem), transparent);
+  }
+  .nav ul::-webkit-scrollbar { display: none; }
+  .nav li { flex: none; }
+  .nav a {
+    min-height: 44px;
+    padding: 0.35rem 0.7rem;
+    font-size: 0.95rem;
+    white-space: nowrap;
+    border-radius: 10px 10px 0 0;
+  }
+  .nav a[aria-current="page"] { background: var(--bc-tint); }
+  .nav a:focus-visible { outline-offset: -3px; }
 }
 @media (min-width: 82rem) {
   .nav { flex: 1 1 auto; }
@@ -216,79 +244,82 @@ a:hover { text-decoration-thickness: 0.14em; }
   margin: 0;
   color: var(--muted);
 }
+@media (max-width: 37.49rem) {
+  .start-kopf { padding: 1.1rem 1rem 0.9rem; }
+  .start-kopf h1 { font-size: 1.95rem; margin-bottom: 0.5rem; }
+  .start-kopf .lead { font-size: 1rem; line-height: 1.45; }
+}
 
-/* Hefte: farbiger Umschlag, weißes Schild mit Titel. Die ganze Fläche ist der Link. */
+/* Hefte: farbiger Umschlag, weißes Schild mit Titel. Die ganze Fläche ist der Link.
+   Kompakt: der Umschlag zeigt sich als breiter Rücken links mit Symbol und als schmaler Rand um das Schild. */
 .hefte {
   list-style: none;
   max-width: var(--maxw);
   margin: 0 auto;
-  padding: 0.5rem 1rem 1rem;
+  padding: 0.25rem 1rem 1rem;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 1.1rem;
+  gap: 0.6rem;
 }
-@media (min-width: 40rem) { .hefte { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 64rem) { .hefte { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 37.5rem) { .hefte { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.9rem; } }
+@media (min-width: 64rem) { .hefte { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.1rem; } }
 
 .heft {
   min-width: 0;
   position: relative;
   background: var(--bc);
-  border-radius: var(--radius);
-  padding: 1rem 1rem 1.1rem 1.6rem;
+  border-radius: var(--radius-s);
+  padding: 0.3rem 0.3rem 0.3rem 3.2rem;
   display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  min-height: 13rem;
 }
 /* Heftrücken: dunklere Kante links */
 .heft::before {
   content: "";
   position: absolute;
   left: 0; top: 0; bottom: 0;
-  width: 0.6rem;
-  border-radius: var(--radius) 0 0 var(--radius);
+  width: 0.4rem;
+  border-radius: var(--radius-s) 0 0 var(--radius-s);
   background: color-mix(in srgb, var(--bc) 70%, #000);
 }
 .heft .heft-symbol {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.18);
+  position: absolute;
+  left: 0.4rem;
+  top: 0;
+  width: 2.8rem;
+  height: 100%;
+  max-height: 4.6rem;
   color: #fff;
   display: grid;
   place-items: center;
 }
-.heft .heft-symbol .symbol { width: 1.7rem; height: 1.7rem; }
+.heft .heft-symbol .symbol { width: 1.45rem; height: 1.45rem; }
 .heft .schild {
   background: var(--schild);
   color: var(--ink);
-  border-radius: var(--radius-s);
-  padding: 0.8rem 1rem 0.9rem;
+  border-radius: calc(var(--radius-s) - 4px);
+  padding: 0.45rem 0.75rem 0.5rem;
   flex: 1;
+  min-width: 0;
 }
 .heft h2 {
-  font-size: 1.3rem;
-  line-height: 1.2;
-  margin: 0 0 0.35rem;
+  font-size: 1.1rem;
+  line-height: 1.25;
+  margin: 0 0 0.1rem;
   letter-spacing: -0.01em;
 }
 .heft h2 a { color: inherit; text-decoration: none; }
-.heft h2 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius); }
+.heft h2 a::after { content: ""; position: absolute; inset: 0; border-radius: var(--radius-s); }
 .heft h2 a:focus-visible { outline: none; }
 .heft:has(a:focus-visible) { outline: 3px solid var(--focus); outline-offset: 3px; }
-.heft p { margin: 0; color: var(--muted); hyphens: auto; }
-.heft .schild { min-width: 0; }
-@media (max-width: 39.99rem) {
-  .heft { flex-direction: row; align-items: flex-start; min-height: 0; padding: 0.8rem 0.8rem 0.8rem 1.3rem; gap: 0.8rem; }
-  .heft .heft-symbol { width: 2.6rem; height: 2.6rem; margin-top: 0.2rem; }
-  .heft .heft-symbol .symbol { width: 1.5rem; height: 1.5rem; }
-}
-@media (max-width: 22.5rem) {
-  .heft { flex-direction: column; }
+.heft p { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; hyphens: auto; }
+.heft:hover .schild h2 { text-decoration: underline; text-decoration-thickness: 0.08em; text-underline-offset: 0.16em; }
+@media (min-width: 37.5rem) {
+  .heft { padding: 0.4rem 0.4rem 0.4rem 3.6rem; }
+  .heft .heft-symbol { width: 3.2rem; max-height: 5rem; }
+  .heft .heft-symbol .symbol { width: 1.6rem; height: 1.6rem; }
+  .heft .schild { padding: 0.7rem 0.95rem 0.8rem; }
   .heft h2 { font-size: 1.2rem; }
 }
-.heft:hover .schild h2 { text-decoration: underline; text-decoration-thickness: 0.08em; text-underline-offset: 0.16em; }
 
 /* Allgemeine Seitenstruktur */
 
